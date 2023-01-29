@@ -25,3 +25,11 @@ dotnet sln add Quick.Students.Domain
 
 cd .\Quick.Students.Infrastructure\
 dotnet add reference ..\Quick.Students.Domain\
+
+dotnet new classlib -o Quick.Students.Application
+dotnet sln add Quick.Students.Application
+dotnet add package Microsoft.EntityFrameworkCore
+
+
+cd .\Quick.Students.Application\
+dotnet add reference ..\Quick.Students.Domain\
