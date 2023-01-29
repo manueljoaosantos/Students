@@ -4,7 +4,7 @@ using Quick.Students.Infrastructure.DataAccess.MsSql;
 
 namespace Quick.Students.Infrastructure.DataAccess
 {
-public class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         // Lazy Loading Repository
         private IBaseRepostitory<Student, int> _studentRepository;
