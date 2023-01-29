@@ -33,3 +33,15 @@ dotnet add package Microsoft.EntityFrameworkCore
 
 cd .\Quick.Students.Application\
 dotnet add reference ..\Quick.Students.Domain\
+
+
+dotnet new webapi -o Quick.Students.API
+dotnet sln add Quick.Students.API
+
+cd .\Quick.Students.API\
+
+dotnet add package Microsoft.EntityFrameworkCore
+dotnet add package Microsoft.entityframeworkcore.design
+dotnet add package System.IdentityModel.Tokens.Jwt
+
+dotnet add reference ../Quick.Students.Application

@@ -1,0 +1,16 @@
+# Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP .NET Core service.
+
+version: '3.4'
+
+services:
+  quickstudentsapi:
+    image: quick.students.api
+    build:
+      context: .
+      dockerfile: Quick.Students.API/Dockerfile
+    ports:
+      - 5275:5275
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    volumes:
+      - ~/.vsdbg:/remote_debugger:rw
