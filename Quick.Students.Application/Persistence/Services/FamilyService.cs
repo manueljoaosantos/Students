@@ -1,7 +1,6 @@
 using Quick.Students.Application.Core.Services;
 using Quick.Students.Domain.Entities;
-using Quick.Students.Infrastructure.DataAccess.Interfaces;
-using Quick.Students.Infrastructure.DataAccess;
+using Quick.Students.Domain.Interfaces;
 
 namespace Quick.Students.Application.Persistence.Services
 {
@@ -26,11 +25,11 @@ public class FamilyService : IFamiliesService
             if (id > 0)
             {
                 var family = await _unitOfWork.FamilyRepository.GetFirst(x => x.Id == id);
-                if (family == null) return null;
+                if (family == null) return new Family();
                 await _unitOfWork.FamilyRepository.Delete(family);
                 await _unitOfWork.Commit();
             }
-            return null;
+            return new Family();
         }
 
         public async Task<List<Family>> GetAll()
@@ -38,7 +37,7 @@ public class FamilyService : IFamiliesService
             return await _unitOfWork.FamilyRepository.GetAllList();
         }
 
-        public async Task<Family> GetFirst(int id)
+        public async Task<Family?> GetFirst(int id)
         {
             return await _unitOfWork.FamilyRepository.GetFirst(x => x.Id == id);
         }

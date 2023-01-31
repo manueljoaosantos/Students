@@ -1,16 +1,33 @@
 # Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP .NET Core service.
 
-version: '3.4'
+version: '3.5'
 
 services:
+  db:
+    image: mysql:5.7
+    container_name: db
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: 1
+      MYSQL_DATABASE: studentsdb
+      MYSQL_USER: dbuser
+      MYSQL_PASSWORD: dbuserpassword
+    ports:
+      - "3306:3306"
+    restart: always
+    volumes:
+      - mysql_data:/var/lib/mysql
+
   quickstudentsapi:
     image: quick.students.api
     build:
       context: .
       dockerfile: Quick.Students.API/Dockerfile
     ports:
-      - 5275:5275
+      - "5275:80"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     volumes:
       - ~/.vsdbg:/remote_debugger:rw
+
+volumes:
+  mysql_data:

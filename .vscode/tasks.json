@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/Quick.Students.Domain/Quick.Students.Domain.csproj",
+                "${workspaceFolder}/Quick.Students.API/Quick.Students.API.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/Quick.Students.Domain/Quick.Students.Domain.csproj",
+                "${workspaceFolder}/Quick.Students.API/Quick.Students.API.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -33,7 +33,7 @@
                 "watch",
                 "run",
                 "--project",
-                "${workspaceFolder}/Quick.Students.Domain/Quick.Students.Domain.csproj"
+                "${workspaceFolder}/Quick.Students.API/Quick.Students.API.csproj"
             ],
             "problemMatcher": "$msCompile"
         },

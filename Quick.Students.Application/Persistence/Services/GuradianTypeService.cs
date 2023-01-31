@@ -1,11 +1,10 @@
 using Quick.Students.Application.Core.Services;
 using Quick.Students.Domain.Entities;
-using Quick.Students.Infrastructure.DataAccess.Interfaces;
-using Quick.Students.Infrastructure.DataAccess;
+using Quick.Students.Domain.Interfaces;
 
 namespace Quick.Students.Application.Persistence.Services
 {
-public class GuradianTypeService : IGuradianTypeService
+    public class GuradianTypeService : IGuradianTypeService
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -26,11 +25,11 @@ public class GuradianTypeService : IGuradianTypeService
             if (id > 0)
             {
                 var family = await _unitOfWork.GuardianRepository.GetFirst(x => x.Id == id);
-                if (family == null) return null;
+                if (family == null) return new GuardianType();
                 await _unitOfWork.GuardianRepository.Delete(family);
                 await _unitOfWork.Commit();
             }
-            return null;
+            return new GuardianType();
         }
 
         public async Task<List<GuardianType>> GetAll()
@@ -38,7 +37,7 @@ public class GuradianTypeService : IGuradianTypeService
             return await _unitOfWork.GuardianTypeRepository.GetAllList();
         }
 
-        public async Task<GuardianType> GetFirst(int id)
+        public async Task<GuardianType?> GetFirst(int id)
         {
             return await _unitOfWork.GuardianTypeRepository.GetFirst(x => x.Id == id);
         }

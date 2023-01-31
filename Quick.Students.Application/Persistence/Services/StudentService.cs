@@ -1,7 +1,6 @@
 using Quick.Students.Application.Core.Services;
 using Quick.Students.Domain.Entities;
-using Quick.Students.Infrastructure.DataAccess.Interfaces;
-using Quick.Students.Infrastructure.DataAccess;
+using Quick.Students.Domain.Interfaces;
 
 namespace Quick.Students.Application.Persistence.Services
 {
@@ -26,11 +25,11 @@ public class StudentService : IStudentService
             if (id > 0)
             {
                 var family = await _unitOfWork.StudentRepository.GetFirst(x => x.Id == id);
-                if (family == null) return null;
+                if (family == null) return new Student();
                 await _unitOfWork.StudentRepository.Delete(family);
                 await _unitOfWork.Commit();
             }
-            return null;
+            return new Student();
         }
 
         public async Task<List<Student>> GetAll()
@@ -38,7 +37,7 @@ public class StudentService : IStudentService
             return await _unitOfWork.StudentRepository.GetAllList();
         }
 
-        public async Task<Student> GetFirst(int id)
+        public async Task<Student?> GetFirst(int id)
         {
             return await _unitOfWork.StudentRepository.GetFirst(x => x.Id == id);
         }

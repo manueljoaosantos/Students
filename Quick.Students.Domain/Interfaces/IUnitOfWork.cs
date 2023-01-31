@@ -1,6 +1,6 @@
 using Quick.Students.Domain.Entities;
 
-namespace Quick.Students.Infrastructure.DataAccess.Interfaces
+namespace Quick.Students.Domain.Interfaces
 {
     public interface IUnitOfWork
     {

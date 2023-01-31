@@ -1,7 +1,6 @@
 using Quick.Students.Application.Core.Services;
 using Quick.Students.Domain.Entities;
-using Quick.Students.Infrastructure.DataAccess.Interfaces;
-using Quick.Students.Infrastructure.DataAccess;
+using Quick.Students.Domain.Interfaces;
 
 namespace Quick.Students.Application.Persistence.Services
 {
@@ -26,11 +25,11 @@ public class GuardianService : IGuardianService
             if (id > 0)
             {
                 var family = await _unitOfWork.GuardianRepository.GetFirst(x => x.Id == id);
-                if (family == null) return null;
+                if (family == null) return new Guardian();
                 await _unitOfWork.GuardianRepository.Delete(family);
                 await _unitOfWork.Commit();
             }
-            return null;
+            return new Guardian();
         }
 
         public async Task<List<Guardian>> GetAll()
@@ -38,7 +37,7 @@ public class GuardianService : IGuardianService
             return await _unitOfWork.GuardianRepository.GetAllList();
         }
 
-        public async Task<Guardian> GetFirst(int id)
+        public async Task<Guardian?> GetFirst(int id)
         {
             var upEntity = await _unitOfWork.GuardianRepository.GetFirst(x => x.Id == id);
             await _unitOfWork.Commit();

@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using Quick.Students.Infrastructure.DataAccess.Interfaces;
+using Quick.Students.Domain.Interfaces;
 using Quick.Students.Domain.Entities;
 
 namespace Quick.Students.Infrastructure.DataAccess.MsSql

@@ -1,7 +1,7 @@
 using System.Linq.Expressions;
 using Quick.Students.Domain.Entities;
 
-namespace Quick.Students.Infrastructure.DataAccess.Interfaces
+namespace Quick.Students.Domain.Interfaces
 {
 public interface IBaseRepostitory<TEntity, in TPrimary> : IDisposable
         where TEntity : BaseEntity<TPrimary>
