@@ -3,3 +3,4 @@
 Debug/
 appsettings.json
 *.db
+appsettings.Development.json

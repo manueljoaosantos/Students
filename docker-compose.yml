@@ -1,0 +1,83 @@
+# Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP .NET Core service.
+
+version: '3.5'
+
+services:
+  db:
+    image: mysql:5.7
+    container_name: db
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: 1
+      MYSQL_DATABASE: studentsdb
+      MYSQL_USER: dbuser
+      MYSQL_PASSWORD: dbuserpassword
+    ports:
+      - "3306:3306"
+    restart: always
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  quickstudentsapi:
+    image: quick.students.api:latest
+    depends_on:
+      - db    
+    container_name: quick.students.api
+    #build:
+    #  context: .
+    #  dockerfile: Quick.Students.API/Dockerfile
+    ports:
+      - "5275:80"
+    restart: always
+
+  mysql-workbench:
+    image: lscr.io/linuxserver/mysql-workbench:latest
+    container_name: mysql-workbench
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    volumes:
+      - /path/to/config:/config
+    ports:
+      - 3000:3000
+    cap_add:
+      - IPC_LOCK
+    restart: unless-stopped
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: keycloak
+    environment:
+      KC_DB: postgres
+      KC_DB_DATABASE: keycloak
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: password
+      KC_DB_SCHEMA: public
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admadmin123in
+      KEYCLOAK_IMPORT: /opt/keycloak/data/import/realm-export.json
+      KC_DB_VENDOR: POSTGRES
+      KC_DB_URL_HOST: db_auth
+    volumes:
+      - ./docker/keycloak:/opt/keycloak/data/import
+    ports:
+      - 8080:8080
+    command: [ 'start-dev --import-realm' ]
+    depends_on:
+      - db_auth
+    restart: always
+    
+  db_auth:
+    image: postgres:13
+    container_name: db_auth
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgressqlkeycloak_data:/var/lib/postgresql/data  
+
+volumes:
+  mysql_data:
+  mysql-workbench-data:
+  postgressqlkeycloak_data:

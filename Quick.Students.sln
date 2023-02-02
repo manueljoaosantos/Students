@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quick.Students.Domain", "Qu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quick.Students.Application", "Quick.Students.Application\Quick.Students.Application.csproj", "{9B08E43B-2A0E-4EA3-912A-45F71C3DE764}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quick.Students.API", "Quick.Students.API\Quick.Students.API.csproj", "{D342B206-2275-4E1F-A120-5FA32D39D7D7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{9B08E43B-2A0E-4EA3-912A-45F71C3DE764}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B08E43B-2A0E-4EA3-912A-45F71C3DE764}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B08E43B-2A0E-4EA3-912A-45F71C3DE764}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D342B206-2275-4E1F-A120-5FA32D39D7D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D342B206-2275-4E1F-A120-5FA32D39D7D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D342B206-2275-4E1F-A120-5FA32D39D7D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D342B206-2275-4E1F-A120-5FA32D39D7D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

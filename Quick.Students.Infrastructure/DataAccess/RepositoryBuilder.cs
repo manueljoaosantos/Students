@@ -1,4 +1,4 @@
-using Quick.Students.Infrastructure.DataAccess.Interfaces;
+using Quick.Students.Domain.Interfaces;
 using Quick.Students.Infrastructure.DataAccess.MsSql;
 using Quick.Students.Domain.Entities;
 
