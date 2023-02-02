@@ -29,5 +29,55 @@ services:
       - "5275:80"
     restart: always
 
+  mysql-workbench:
+    image: lscr.io/linuxserver/mysql-workbench:latest
+    container_name: mysql-workbench
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    volumes:
+      - /path/to/config:/config
+    ports:
+      - 3000:3000
+    cap_add:
+      - IPC_LOCK
+    restart: unless-stopped
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: keycloak
+    environment:
+      KC_DB: postgres
+      KC_DB_DATABASE: keycloak
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: password
+      KC_DB_SCHEMA: public
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admadmin123in
+      KEYCLOAK_IMPORT: /opt/keycloak/data/import/realm-export.json
+      KC_DB_VENDOR: POSTGRES
+      KC_DB_URL_HOST: db_auth
+    volumes:
+      - ./docker/keycloak:/opt/keycloak/data/import
+    ports:
+      - 8080:8080
+    command: [ 'start-dev --import-realm' ]
+    depends_on:
+      - db_auth
+    restart: always
+    
+  db_auth:
+    image: postgres:13
+    container_name: db_auth
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgressqlkeycloak_data:/var/lib/postgresql/data  
+
 volumes:
   mysql_data:
+  mysql-workbench-data:
+  postgressqlkeycloak_data:
