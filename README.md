@@ -57,3 +57,11 @@ dotnet ef database update -c StudentDbContext
 # Para usar o keycloak via docker
 127.0.0.1 keycloak
 
+
+npm install -g @angular/cli
+npm install -g npm@9.4.1
+
+ng new Quick.Students.Frontend --skip-tests
+
+cd .\Quick.Students.Frontend\
+ng serve
